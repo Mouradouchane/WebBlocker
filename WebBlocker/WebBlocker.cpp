@@ -1,12 +1,14 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "WebBlocker.h"
-#include <Windows.h>
 #include <cstdlib>
 #include <ctime>
+#include <Windows.h>
+// for user
+#include <lmcons.h>
+#include "WebBlocker.h"
 
-// checking system if windows
+// checking system if windows as first step
 #ifdef __unix__
 	#define isUNIX 1
 #elif defined(WIN32) || defined(_WIN32)
@@ -20,23 +22,26 @@ namespace DATE_TIME {
 	short day = timeObject->tm_mday, mouth = (timeObject->tm_mon+1);
 	int year = (timeObject->tm_year + 1900);
 
-	void PrintDate() {
-		cout << day << '/' << mouth << '/' << year << endl;
+	void PrintDate(string newL = "") {
+		cout << day << '/' << mouth << '/' << year << newL;
 	}
 
+	string Date = "[ " __TIME__  "]";
 }
 
 using namespace std;
-using namespace funcs;
+using namespace Filesfuncs;
 using namespace constants;
 using namespace asciiArt;
 using namespace ConsoleColors;
 using namespace ConsoleOutputs;
 using namespace DATE_TIME;
 
+// this function for checking if host file is exit in windows or not
 void checkingDesintation() {
 	while (true) {
 		if (fileIsExist(standarFilePath)) {
+			// if exist print hint & going for next step
 			setHintColor();
 			Sleep(500);
 			cout << "[+] Founding Destination to System32" << endl;
@@ -44,6 +49,7 @@ void checkingDesintation() {
 			break;
 		}
 		else {
+			// else print warninng + trying making new HOST File !
 			Sleep(500);
 			setWarningColor();
 			cout << "[!] Missing Destionation to System32 'Destination Not Found'" << endl;
@@ -51,8 +57,8 @@ void checkingDesintation() {
 			Sleep(250);
 			setHintColor();
 			cout << "[+] Adding Destination to System32 :) " << endl;
-			filePutContent(standarFilePath, "# added in ");
-
+			// trying making new HOST File 
+			filePutContent(standarFilePath, "# added in " + Date);
 		}
 	}
 }
@@ -64,35 +70,62 @@ int main(){
 		fstream 	A combination of ofstream and ifstream: creates, reads, and writes to files
 	*/
 
+	/*	
+		Program start 
+		set console title as first step
+	*/
 	SetConsoleTitle(TEXT("WebBlocker v1.0"));
 
-	PrintDate();
 
 	printAsciiArt();
 	setDefultColor();
 
-	Sleep(500);
-	PRINT("def" , "Welcome to WebBlocker v1.0 Beta ...");
+	Sleep(500); // just sleeping for nice transition :)
+	PRINT("def" , "Welcome to WebBlocker v1.0 Beta ..." + Date); // printing Date in starting
 
-	Sleep(500);
+
+
+	Sleep(500); // just sleeping for nice transition :)
+
 	setWarningColor();
 	cout <<"[!] Checking Requirements Before Staring ..." << endl;
 	setDefultColor();
 
-	Sleep(500);
+	Sleep(500); // just sleeping for nice transition :)
 
 	if (isWIN) {
+		// if programme start in windows print hint to user
 		setHintColor(); 
 		cout << "[+] Environment Working Windows Found" << endl;
+		setConsoleColor(13);
+		cout << "[$] Programme Requirements Found" << endl;
+		setDefultColor();
 	}
 	else {
+		// else Error Environment + Exit Programme 
 		setErrorColor();
-		cout << "[x] Environment Not Working 'WebBlocker' Only In Windows";
+		cout << "[x] Environment Not Working 'WebBlocker' Only Work In Windows" << endl;
+		cout << "[x] Missing Host File " << endl;
+
+		Sleep(500); 
 		exit(1);
 	}
 
 	Sleep(500);
 	
+	// checking host file 
+	checkingDesintation();
+	
+	setWarningColor();
+	cout << "[!] Note : All websites that you place as a user It will be blocked \n \t   until the next formatting" << endl;
+	
+	setDefultColor();
+
+	cout << "webblocker : -h or --help" << endl;
+
+	char username[UNLEN + 1];
+	DWORD username_len = UNLEN + 1;
+	GetUserName(username, &username_len);
 
 
 	setDefultColor();

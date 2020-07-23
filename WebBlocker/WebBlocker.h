@@ -1,11 +1,14 @@
 ﻿#include <iostream>
 #include <fstream>
 #include <string>
+// for win API
 #include <Windows.h>
+// for user
+#include <lmcons.h>
 
 using namespace std;
 
-namespace funcs {
+namespace Filesfuncs {
 
 	string readAll(string fileName) {
 
@@ -41,16 +44,21 @@ namespace funcs {
 		return f.good();
 	}
 
-	void filePutContent(string fileName, string content) {
-		ofstream fName(fileName, ios_base::app);
+	bool filePutContent(string fileName, string content) {
+			// trying open file and putting some content
+			ofstream fName(fileName, ios_base::app);
 
-		if (fName.is_open()) {
-			fName << content << endl;
-		}
+			// if open putting content
+			if (fName.is_open()) {
+				
+				fName << content << endl;
 
-		fName.close();
+				fName.close();
+				return true;
+			}
+
+			return false;
 	}
-
 
 	string Boo(bool b) {
 		string s;
