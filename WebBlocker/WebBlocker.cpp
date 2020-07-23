@@ -4,7 +4,6 @@
 #include <cstdlib>
 #include <ctime>
 #include <Windows.h>
-// for user
 #include <lmcons.h>
 #include "WebBlocker.h"
 
@@ -123,14 +122,34 @@ int main(){
 
 	cout << "webblocker : -h or --help" << endl;
 
-	char username[UNLEN + 1];
-	DWORD username_len = UNLEN + 1;
-	GetUserName(username, &username_len);
-
-
 	setDefultColor();
 
-	getchar();
+	/*
+		- this for getting user input
+	*/
+
+	const string userName = getUserName(), userNameCommand = "[" + userName + "] :" , output = "[webBlocker] : ";
+	string command;
+
+	while (true) {
+
+		cout << userNameCommand; getline(cin , command);
+
+		if (command == "exit" || command == "EXIT" || command == "Exit" || "webBlocker exit") {
+
+			exit(1);
+		}
+		else if (command) {
+
+		}
+		else {
+			setWarningColor();
+			cout << output << command << " not found !" << endl;
+			setDefultColor();
+		}
+
+	}
+
 	return 0;
 }
 

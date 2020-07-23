@@ -3,8 +3,7 @@
 #include <string>
 // for win API
 #include <Windows.h>
-// for user
-#include <lmcons.h>
+
 
 using namespace std;
 
@@ -147,4 +146,16 @@ namespace ConsoleOutputs {
 
 namespace constants {
 	const string standarFilePath = "C:/Windows/System32/Drivers/etc/hosts";
+
+
+	string getUserName() {
+		char* userName = getenv("USER");
+
+		if(!userName) {
+			userName = getenv("USERNAME");
+		}
+
+		return userName;
+	}
+
 }
