@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 // for win API
 #include <Windows.h>
 
@@ -158,4 +159,35 @@ namespace constants {
 		return userName;
 	}
 
+}
+
+namespace stringNews {
+
+	bool starts_with(const std::string& str, const std::string& prefix)
+	{
+		return str.find(prefix) == 0;
+	}
+
+	bool ends_with(const std::string& str, const std::string& suffix)
+	{
+		const auto pos = str.rfind(suffix);
+
+		return (pos != std::string::npos) && (pos == (str.length() - suffix.length()));
+	}
+
+	std::vector<std::string> split(const std::string& str, const std::string& delim){
+		size_t pos_start = 0, pos_end, delim_len = delim.length();
+		std::string token;
+		std::vector<std::string> tokens;
+
+		while ((pos_end = str.find(delim, pos_start)) != std::string::npos)
+		{
+			token = str.substr(pos_start, pos_end - pos_start);
+			pos_start = pos_end + delim_len;
+			tokens.push_back(token);
+		}
+
+		tokens.push_back(str.substr(pos_start));
+		return tokens;
+	}
 }

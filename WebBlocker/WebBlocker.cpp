@@ -3,6 +3,7 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
+#include <vector>
 #include <Windows.h>
 #include <lmcons.h>
 #include "WebBlocker.h"
@@ -35,6 +36,7 @@ using namespace asciiArt;
 using namespace ConsoleColors;
 using namespace ConsoleOutputs;
 using namespace DATE_TIME;
+using namespace stringNews;
 
 // this function for checking if host file is exit in windows or not
 void checkingDesintation() {
@@ -131,16 +133,39 @@ int main(){
 	const string userName = getUserName(), userNameCommand = "[" + userName + "] :" , output = "[webBlocker] : ";
 	string command;
 
+	vector<string> commandsHELP = {
+		"webBlocker 'command' 'args'",
+		"-v or --version for programme version",
+		"-b or --block for blocking website \n \t Note! : enter target web site without 'Protocole http|https|...' \n \t Note! : enter target web without 'www.' \n \t  Ex: ex.com",
+		"-l or --log for watching list of blocked sites + time"
+	};
+
 	while (true) {
 
 		cout << userNameCommand; getline(cin , command);
 
-		if (command == "exit" || command == "EXIT" || command == "Exit" || "webBlocker exit") {
-
+		if (command == "exit" || command == "EXIT" || command == "Exit" || command == "webBlocker exit") {
 			exit(1);
 		}
-		else if (command) {
+		else if (command == "webBlocker --help" || command == "webBlocker -h" || command == "help") {
+			for (unsigned short c = 0; c < commandsHELP.size(); c += 1) {
+				setConsoleColor(13);
+				cout << output;
+				setDefultColor();
+				cout << commandsHELP[c] << endl;
+			}
+		}
+		else if (starts_with(command, "webBlocker --block") || starts_with(command , "webBlocker -b")) {
+			
+			vector<string> vars = split(command , " ");
+			cout << "command block detected type :" << vars.size() <<endl;
 
+			for (unsigned short i = 2; i < vars.size(); i += 1) { 
+				setHintColor();
+				cout << userNameCommand;
+				setDefultColor();
+				cout << " trying blocking web " << " : " << vars[i] << endl;
+			}
 		}
 		else {
 			setWarningColor();
