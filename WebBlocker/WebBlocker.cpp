@@ -122,7 +122,7 @@ int main(){
 	
 	setDefultColor();
 
-	cout << "webblocker : -h or --help" << endl;
+	cout << "webBlocker : -h or --help" << endl;
 
 	setDefultColor();
 
@@ -135,36 +135,50 @@ int main(){
 
 	vector<string> commandsHELP = {
 		"webBlocker 'command' 'args'",
+		"webBlocker --exit or Exit or EXIT",
 		"-v or --version for programme version",
-		"-b or --block for blocking website \n \t Note! : enter target web site without 'Protocole http|https|...' \n \t Note! : enter target web without 'www.' \n \t  Ex: ex.com",
-		"-l or --log for watching list of blocked sites + time"
+		"-b or --block for blocking website \nNote! : enter target web site without 'Protocole http|https|...' \nNote! : enter target web without 'www.' \nEx: ex.com",
+		"-l or --log for watching list of blocked sites + time",
 	};
 
 	while (true) {
 
 		cout << userNameCommand; getline(cin , command);
 
-		if (command == "exit" || command == "EXIT" || command == "Exit" || command == "webBlocker exit") {
+		if (command == "exit" || command == "EXIT" || command == "Exit" || command == "webBlocker --exit") {
 			exit(1);
 		}
 		else if (command == "webBlocker --help" || command == "webBlocker -h" || command == "help") {
 			for (unsigned short c = 0; c < commandsHELP.size(); c += 1) {
+				Sleep(250);
 				setConsoleColor(13);
 				cout << output;
 				setDefultColor();
-				cout << commandsHELP[c] << endl;
+				cout << commandsHELP[c] << endl <<endl;
 			}
 		}
 		else if (starts_with(command, "webBlocker --block") || starts_with(command , "webBlocker -b")) {
 			
 			vector<string> vars = split(command , " ");
-			cout << "command block detected type :" << vars.size() <<endl;
-
+			
 			for (unsigned short i = 2; i < vars.size(); i += 1) { 
-				setHintColor();
-				cout << userNameCommand;
-				setDefultColor();
-				cout << " trying blocking web " << " : " << vars[i] << endl;
+
+				string targetweb = vars[i]; targetweb;
+
+				if (vars[i] != " " || vars[i] != "") {
+					Sleep(250);
+
+					setHintColor();
+					cout << userNameCommand;
+					setDefultColor();
+				
+					filePutContent(standarFilePath , "127.0.0.1 " + vars[i]);
+					filePutContent(standarFilePath,  "127.0.0.1 www." + vars[i]);
+					filePutContent(standarFilePath,  "127.0.0.1 https://www." + vars[i]);
+					filePutContent(standarFilePath,  "127.0.0.1 http://www." + vars[i]);
+
+					cout << " blocking web " << " : " << vars[i] << endl;
+				}
 			}
 		}
 		else {
