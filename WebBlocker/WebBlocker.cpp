@@ -77,7 +77,6 @@ int main(){
 	*/
 	SetConsoleTitle(TEXT("WebBlocker v1.0"));
 
-
 	printAsciiArt();
 	setDefultColor();
 
@@ -163,27 +162,48 @@ int main(){
 			
 			for (unsigned short i = 2; i < vars.size(); i += 1) { 
 
-				string targetweb = vars[i]; targetweb;
+				string targetweb(vars[i].erase(vars[i].find_last_not_of(" \n\r\t") + 1));
 
-				if (vars[i] != " " || vars[i] != "") {
+				trim(targetweb);
+
+				if (targetweb != " " && targetweb != "" && 
+					starts_with(targetweb , "www.") != true &&
+					starts_with(targetweb , "https://") != true &&
+					starts_with(targetweb, "https::") != true &&
+					starts_with(targetweb, "http://") != true &&
+					include(targetweb , '.')
+					) {
+
 					Sleep(250);
 
+					if (ends_with(targetweb, ".")) {
+						targetweb += "com";
+					}
+
 					setHintColor();
-					cout << userNameCommand;
+					cout << output;
 					setDefultColor();
 				
-					filePutContent(standarFilePath , "127.0.0.1 " + vars[i]);
-					filePutContent(standarFilePath,  "127.0.0.1 www." + vars[i]);
-					filePutContent(standarFilePath,  "127.0.0.1 https://www." + vars[i]);
-					filePutContent(standarFilePath,  "127.0.0.1 http://www." + vars[i]);
+					filePutContent(standarFilePath , "127.0.0.1 " + targetweb);
+					filePutContent(standarFilePath, "127.0.0.1 www." + targetweb);
+					filePutContent(standarFilePath, "127.0.0.1 https://www." + targetweb);
+					filePutContent(standarFilePath, "127.0.0.1 http://www." + targetweb);
 
-					cout << " blocking web " << " : " << vars[i] << endl;
+					cout << " blocking web " << " => " << targetweb << endl;
+					
+				}
+				else {
+					Sleep(250);
+
+					setWarningColor();
+					cout << output << " Wrong Syntax Because " << targetweb << " Not Valid 'WebSite' " << endl;
+					setDefultColor();
 				}
 			}
 		}
 		else {
 			setWarningColor();
-			cout << output << command << " not found !" << endl;
+			cout << output << command << " not found ! try 'help' " << endl;
 			setDefultColor();
 		}
 

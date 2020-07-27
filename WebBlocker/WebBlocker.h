@@ -51,7 +51,7 @@ namespace Filesfuncs {
 			// if open putting content
 			if (fName.is_open()) {
 				
-				fName << content << endl;
+				fName << "\n" <<content << endl;
 
 				fName.close();
 				return true;
@@ -168,6 +168,7 @@ namespace stringNews {
 		return str.find(prefix) == 0;
 	}
 
+
 	bool ends_with(const std::string& str, const std::string& suffix)
 	{
 		const auto pos = str.rfind(suffix);
@@ -189,5 +190,29 @@ namespace stringNews {
 
 		tokens.push_back(str.substr(pos_start));
 		return tokens;
+	}
+
+	void trim_left(std::string& str)
+	{
+		str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](int ch) { return !std::isspace(ch); }));
+	}
+
+	void trim_right(std::string& str)
+	{
+		str.erase(std::find_if(str.rbegin(), str.rend(), [](int ch) { return !std::isspace(ch); }).base(), str.end());
+	}
+
+	void trim(std::string& str)
+	{
+		trim_left(str);
+		trim_right(str);
+	}
+
+	bool include(std::string strv = "_", char key = '@') {
+		for (unsigned short c = 0; c < strv.length(); c += 1) {
+			if (strv[c] == key) return true;
+		}
+
+		return false;
 	}
 }
