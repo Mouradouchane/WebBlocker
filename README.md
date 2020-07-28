@@ -6,7 +6,7 @@ it's a small and fast program to block sites forever without step back
 
 
 ### how WebBlocker work :
-webBlocker work in simple and easy way by using windows hosts for blocking target websites
+*webBlocker* work in simple and easy way by using windows hosts for blocking target websites
 
 
 ### requirement  :
