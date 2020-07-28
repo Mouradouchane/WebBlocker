@@ -18,7 +18,7 @@ it's a **small and fast** program to blocking web sites to **the next formatting
 
 
 
-## downloading :
+## download :
 - if you familiar with 'git version control' you can make a simple **clone** directly :
 ```
   git clone https://github.com/Mouradouchane/WebBlocker.git
@@ -28,4 +28,12 @@ it's a **small and fast** program to blocking web sites to **the next formatting
 1. click on **green button** has content **code** .
 2. click on **Download ZIP** and wait downloading complet .
 
-## installation :
+## usage :
+  - after you extract zip file .
+  - go to **Debug folder** and open **WebBlocker.exe** .
+  - then should open **WebBlocker** as **console application** .
+
+  **for see all commands avalible in programme try enter :**
+  ``` help or webBlocker --help```
+  
+  
