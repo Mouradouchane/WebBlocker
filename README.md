@@ -1,19 +1,22 @@
 # WebBlocker Beta v1 : none stable 
 
 
-## * about :
+## about :
 it's a small and fast program to block sites forever without step back 
 
 
-## * how WebBlocker work :
+## how WebBlocker work :
+------------------------
 webBlocker work in simple and easy way by using windows hosts for blocking target websites
 
 
-## * requirement  :
+## requirement  :
+-----------------
 - windows operating system
 - maybe C++ runtime requirement
 
 
-## * downloading and installation :
+## downloading and installation :
+---------------------------------
 
 
