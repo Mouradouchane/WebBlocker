@@ -18,10 +18,15 @@ it's a **small and fast** program to blocking web sites to **the next formatting
 
 
 
-## downloading and installation :
-if you familiar with 'git version control' and github you can make a simple **clone**
+## downloading :
+- if you familiar with 'git version control' you can make a simple **clone** directly :
 ```
-  git clone 
+  git clone https://github.com/Mouradouchane/WebBlocker.git
 ```
 
+- if you're not familiar with 'git version control' follow this steps :
+1.
+2. click on **green button** has content **code** .
+3. click on **Download As ZIP** and wait downloading complet .
 
+## installation :
