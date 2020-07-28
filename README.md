@@ -33,7 +33,21 @@ it's a **small and fast** program to blocking web sites to **the next formatting
   - go to **Debug folder** and open **WebBlocker.exe** .
   - then should open **WebBlocker** as **console application** .
 
-  **for see all commands avalible in programme try enter :**
-  ``` help or webBlocker --help```
+  - **for see all commands avalible in programme try enter :**
+  ``` 
+  help or webBlocker --help
+  ```
+  - for block website or multiple websites use :
+  NOTE! : don't use **www.** or **http:** or **https:** or **special charachters** just 'address.domain'
+  ```
+  webBlocker -b address.domain address.domain ... 
+  ```
+  - for ex : ``` webBlocker -b xvvx.com ggtr.net oppo.tv ```
+
+  - **if** your command written and **worked correctly** you should get message from WebBlocker say :
+  ```
+  \[webBlocker\] : blocking web => address.domain
+  ```
+  - else you see warning message probably this message content is invalid format .
   
   
