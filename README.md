@@ -1,12 +1,15 @@
-# WebBlocker Beta v1 : none stable 
+# WebBlocker Beta v1 : *none stable*
+
 
 
 ## about :
 it's a **small and fast** program to blocking web sites to **the next formatting of pc** without step back .
 
 
+
 ## how WebBlocker work :
 **webBlocker** work in simple and easy way by using **windows hosts** for blocking target websites.
+
 
 
 ## requirement  :
@@ -14,7 +17,11 @@ it's a **small and fast** program to blocking web sites to **the next formatting
 - **maybe** C++ runtime requirement .
 
 
-## downloading and installation :
 
+## downloading and installation :
+if you familiar with 'git version control' and github you can make a simple **clone**
+```
+  git clone 
+```
 
 
