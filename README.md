@@ -38,7 +38,7 @@ it's a **small and fast** program to blocking web sites to **the next formatting
   help or webBlocker --help
   ```
   - for block website or multiple websites use :
-  NOTE! : don't use **www.** or **http:** or **https:** or **special charachters** just 'address.domain'
+  NOTE! : don't use **\www.** or **http:** or **https:** or **special charachters** just 'address.domain'
   ```
   webBlocker -b address.domain address.domain ... 
   ```
@@ -46,7 +46,7 @@ it's a **small and fast** program to blocking web sites to **the next formatting
 
   - **if** your command written and **worked correctly** you should get message from WebBlocker say :
   ```
-  \[webBlocker\] : blocking web => address.domain
+  [webBlocker] : blocking web => address.domain
   ```
   - else you see warning message probably this message content is invalid format .
   
