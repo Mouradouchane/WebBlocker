@@ -140,12 +140,17 @@ int main(){
 		"-l or --log for watching list of blocked sites + time",
 	};
 
+	const string AppVersion = "version 1 beta none stable";
+
 	while (true) {
 
 		cout << userNameCommand; getline(cin , command);
 
 		if (command == "exit" || command == "EXIT" || command == "Exit" || command == "webBlocker --exit") {
 			exit(1);
+		}
+		else if (command == "webBlocker --version" || command == "webBlocker -v" || command == "version") {
+			cout << output << AppVersion << endl;
 		}
 		else if (command == "webBlocker --help" || command == "webBlocker -h" || command == "help") {
 			for (unsigned short c = 0; c < commandsHELP.size(); c += 1) {
