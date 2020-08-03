@@ -34,6 +34,7 @@ using namespace logFunctions;
 
 int main(){
 
+		set_New_Blocked_Site_To_The_Log("gta5.com");
 
 	/*
 		ofstream 	Creates and writes to files

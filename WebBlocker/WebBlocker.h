@@ -200,6 +200,12 @@ namespace logFunctions {
 			string getFullTime() {
 				return fullTime;
 			}
+			string getTime() {
+				return this->time;
+			}
+			string getDate() {
+				return this->date;
+			}
 	};
 
 	void printAllBlockedSitesInLog() {
@@ -255,8 +261,17 @@ namespace logFunctions {
 		}
 	}
 
-	void set_New_Blocked_Site_To_The_Log() {
-		ifstream log("log.json");
+	void set_New_Blocked_Site_To_The_Log(string site) {
+		json newData = json::parse(readAll("log.json"));
+		BlockedSite newSite(site);
+
+		cout << newData << newData.size() << endl;
+
+		newData["blockedSites"].push_back({
+			"website:" + newSite.getSite() + ", time:" + newSite.getTime() + ", date:" + newSite.getDate()
+		});
+
+		cout << newData << newData.size() << endl;
 	}
 }
 
