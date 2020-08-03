@@ -1,19 +1,29 @@
-﻿#include <iostream>
+﻿// for files read and wirte ...
+#include <iostream>
 #include <fstream>
+// for string usage
 #include <string>
 #include <vector>
 // for win API
 #include <Windows.h>
-
+// for log.json
+#include <windows.data.json.h>
+//for json usage
+#include "json.hpp"
 
 using namespace std;
 
 namespace Filesfuncs {
 
-	string readAll(string fileName) {
+	string readAll(string fileName , bool OpenAsBinary = false) {
 
-		// open file
-		ifstream fName(fileName);
+		// define var for opening file
+		ifstream fName;
+
+		// open file as binary or not
+		if (!OpenAsBinary) fName = ifstream(fileName);
+		else fName = ifstream(fileName, std::ifstream::binary);
+
 		string content, line;
 
 		// if file is open correctlly
@@ -67,6 +77,46 @@ namespace Filesfuncs {
 		else s = "false";
 
 		return s;
+	}
+}
+
+namespace logFunctions {
+
+	using namespace Filesfuncs;
+
+	// for json usage "recommended in library"
+	using json = nlohmann::json;
+
+	// opening log.json and getting all data on it as string
+	string jsonAsString = readAll("log.json" );
+
+
+	// parsing log data from ' jsonAsString '
+	auto log = json::parse(jsonAsString);
+
+	class BlockedSite {
+		private : 
+			string website, block_time , block_date;
+
+		public :
+			BlockedSite(string website , string block_time = __TIME__ , string block_date = __DATE__) {
+				this->website = website;
+				this->block_time = block_time;
+				this->block_date = block_date;
+			}
+			string getSite() {
+				return this->website;
+			}
+			string getFullTime() {
+				return (this->block_time + this->block_date);
+			}
+	};
+
+	string domin = log["blockedSites"][0]["domain"];
+
+	void printjson() {
+		cout << __DATE__ << endl;
+		cout << log["blockedSites"].size() << endl;
 	}
 }
 

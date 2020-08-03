@@ -1,11 +1,17 @@
+// for files read and wirte ...
 #include <iostream>
 #include <fstream>
-#include <string>
+// 
 #include <cstdlib>
-#include <ctime>
+// for string usage
+#include <string>
 #include <vector>
+// for time and windows api
 #include <Windows.h>
+#include <ctime>
 #include <lmcons.h>
+//for json usage
+#include "json.hpp"
 #include "WebBlocker.h"
 
 // checking system if windows as first step
@@ -37,6 +43,7 @@ using namespace ConsoleColors;
 using namespace ConsoleOutputs;
 using namespace DATE_TIME;
 using namespace stringNews;
+using namespace logFunctions;
 
 // this function for checking if host file is exit in windows or not
 void checkingDesintation() {
@@ -65,6 +72,8 @@ void checkingDesintation() {
 }
 
 int main(){
+	printjson();
+
 	/*
 		ofstream 	Creates and writes to files
 		ifstream 	Reads from files

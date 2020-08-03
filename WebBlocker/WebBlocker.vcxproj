@@ -146,6 +146,9 @@
   <ItemGroup>
     <ClInclude Include="WebBlocker.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="log.json" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
