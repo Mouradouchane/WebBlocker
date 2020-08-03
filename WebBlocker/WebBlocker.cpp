@@ -21,26 +21,11 @@
 	#define isWIN 1
 #endif
 
-namespace DATE_TIME {
-	time_t tm = time(0);
-	struct tm* timeObject = localtime(&tm);
-
-	short day = timeObject->tm_mday, mouth = (timeObject->tm_mon+1);
-	int year = (timeObject->tm_year + 1900);
-
-	void PrintDate(string newL = "") {
-		cout << day << '/' << mouth << '/' << year << newL;
-	}
-
-	string Date = "[ " __TIME__  "]";
-}
-
 using namespace std;
 using namespace Filesfuncs;
 using namespace constants;
 using namespace asciiArt;
 using namespace ConsoleColors;
-using namespace ConsoleOutputs;
 using namespace DATE_TIME;
 using namespace stringNews;
 using namespace logFunctions;
@@ -72,7 +57,7 @@ void checkingDesintation() {
 }
 
 int main(){
-	printjson();
+
 
 	/*
 		ofstream 	Creates and writes to files
@@ -90,13 +75,11 @@ int main(){
 	setDefultColor();
 
 	Sleep(500); // just sleeping for nice transition :)
-	PRINT("def" , "Welcome to WebBlocker v1.0 Beta ..." + Date); // printing Date in starting
-
-
+	cout << "Welcome to WebBlocker v1.0 Beta ..." + Date << endl; // printing Date in starting
 
 	Sleep(500); // just sleeping for nice transition :)
 
-	setWarningColor();
+	setWarningColor(); 
 	cout <<"[!] Checking Requirements Before Staring ..." << endl;
 	setDefultColor();
 
@@ -169,6 +152,12 @@ int main(){
 				setDefultColor();
 				cout << commandsHELP[c] << endl <<endl;
 			}
+		}
+		else if (command == "webBlocker --log" || command == "webBlocker -l") {
+			// calling this funtion in WebBlocker.h for reading and printing all 
+			// blocked sites in log.json file
+			printAllBlockedSitesInLog();
+
 		}
 		else if (starts_with(command, "webBlocker --block") || starts_with(command , "webBlocker -b")) {
 			

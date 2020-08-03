@@ -13,6 +13,20 @@
 
 using namespace std;
 
+namespace DATE_TIME {
+	time_t tm = time(0);
+	struct tm* timeObject = localtime(&tm);
+
+	short day = timeObject->tm_mday, mouth = (timeObject->tm_mon + 1);
+	int year = (timeObject->tm_year + 1900);
+
+	void PrintDate(string newL = "") {
+		cout << day << '/' << mouth << '/' << year << newL;
+	}
+
+	string Date = "[" __TIME__  "]";
+}
+
 namespace Filesfuncs {
 
 	string readAll(string fileName , bool OpenAsBinary = false) {
@@ -81,6 +95,7 @@ namespace Filesfuncs {
 }
 
 namespace logFunctions {
+	string output = "[webBlocker] : ";
 
 	using namespace Filesfuncs;
 
@@ -97,27 +112,51 @@ namespace logFunctions {
 	// class for getting all blocked sites in json varible after parse :)
 	class BlockedSite {
 		private : 
-			string website, block_time , block_date;
+			string website, fullTime , domin , date , time;
 
 		public :
-			BlockedSite(string website , string block_time = __TIME__ , string block_date = __DATE__) {
+			BlockedSite(string website , string time = __TIME__ , string date = __DATE__) {
 				this->website = website;
-				this->block_time = block_time;
-				this->block_date = block_date;
+				this->fullTime = (time + " " + date);
+				this->date = date;
+				this->time = time;
 			}
 			string getSite() {
 				return this->website;
 			}
 			string getFullTime() {
-				return (this->block_time + this->block_date);
+				return fullTime;
 			}
 	};
 
-	string domin = log["blockedSites"][0]["domain"];
+	void printAllBlockedSitesInLog() {
+		// vector of BlockedSite of Get on it all sites as objects from ' log '
+		vector<BlockedSite> allSites;
 
-	void printjson() {
-		cout << __DATE__ << endl;
-		cout << log["blockedSites"].size() << endl;
+		try {
+			// get all from 'log' to 'vector allSites'
+			for (unsigned int c = 0; c < log["blockedSites"].size(); c += 1) {
+				// pushing new objects to vector 
+				allSites.push_back(BlockedSite(log["blockedSites"][c]["website"] , log["blockedSites"][c]["time"] , log["blockedSites"][c]["date"]));
+			} 
+
+			// switching color console to red for defining starting table
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE) , 12);
+			cout << output << ("webSite \t \t Time of blocking") << endl;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+
+			for (unsigned int c = 0; c < allSites.size(); c += 1) {
+				Sleep(250);
+				// starting printing blocked sites as in table
+				cout << output << ( allSites[c].getSite() + " \t " + allSites[c].getFullTime() )<< endl;
+			}
+		}
+		catch (exception error) {
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+			cout <<"ERROR : " << error.what() <<endl;
+			// backing to default color
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+		}
 	}
 }
 
@@ -164,36 +203,6 @@ namespace ConsoleColors {
 	void setHintColor() {
 		SetConsoleTextAttribute(asciiArt::standarHandle, 10);
 	}
-}
-
-namespace ConsoleOutputs {
-	
-	void PRINT(string outputType = "def" , string msg = "n/a" , string endLine = "\n") {
-			
-		if (outputType == "hint") {
-			ConsoleColors::setHintColor();
-			cout << "[+] hint\t: ";
-			ConsoleColors::setDefultColor();
-			cout << msg << endLine;
-		}
-		else if (outputType == "error") {
-			ConsoleColors::setErrorColor();
-			cout << "[x] error\t: ";
-			ConsoleColors::setDefultColor();
-			cout << msg << endLine;
-		}
-		else if (outputType == "warn") {
-			ConsoleColors::setWarningColor();
-			cout << "[!] warning\t: ";
-			ConsoleColors::setDefultColor();
-			cout << msg << endLine;
-		}
-		else {
-			ConsoleColors::setDefultColor();
-			cout << "[-] " << msg << endLine;
-		}
-	}
-
 }
 
 namespace constants {

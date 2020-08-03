@@ -2,13 +2,13 @@
   "blockedSites": [
     {
       "website": "pornhub.com",
-      "domain": "com",
-      "block_time": "10:22:10 14/4/2020"
+      "time": "06:49:43",
+      "date": "Aug  3 2020"
     },
     {
       "website": "xnxx.com",
-      "domain": "com",
-      "block_time": "10:22:10 14/4/2020"
+      "time": "06:49:43",
+      "date": "Aug  3 2020"
     }
   ]
 }
