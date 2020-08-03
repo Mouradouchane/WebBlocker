@@ -94,6 +94,7 @@ namespace logFunctions {
 	// parsing log data from ' jsonAsString '
 	auto log = json::parse(jsonAsString);
 
+	// class for getting all blocked sites in json varible after parse :)
 	class BlockedSite {
 		private : 
 			string website, block_time , block_date;
