@@ -13,6 +13,22 @@
 
 using namespace std;
 
+
+namespace constants {
+	const string standarFilePath = "C:/Windows/System32/Drivers/etc/hosts";
+
+
+	string getUserName() {
+		char* userName = getenv("USER");
+
+		if (!userName) {
+			userName = getenv("USERNAME");
+		}
+
+		return userName;
+	}
+}
+
 namespace DATE_TIME {
 	time_t tm = time(0);
 	struct tm* timeObject = localtime(&tm);
@@ -27,7 +43,36 @@ namespace DATE_TIME {
 	string Date = "[" __TIME__  "]";
 }
 
+
+namespace ConsoleColors {
+
+	HANDLE standarHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	void setDefultColor() {
+		SetConsoleTextAttribute(standarHandle, 15);
+	}
+
+	void setConsoleColor(unsigned int color = 15) {
+		if (color > 25) color = 15;
+		SetConsoleTextAttribute(standarHandle, color);
+	}
+
+	void setWarningColor() {
+		SetConsoleTextAttribute(standarHandle, 14);
+	}
+
+	void setErrorColor() {
+		SetConsoleTextAttribute(standarHandle, 12);
+	}
+
+	void setHintColor() {
+		SetConsoleTextAttribute(standarHandle, 10);
+	}
+}
+
 namespace Filesfuncs {
+
+	using namespace ConsoleColors;
 
 	string readAll(string fileName , bool OpenAsBinary = false) {
 
@@ -63,9 +108,18 @@ namespace Filesfuncs {
 	}
 
 	bool fileIsExist(string fileName) {
-		ifstream f(fileName);
+		bool r;
+		try {
+			ifstream f(fileName);
 
-		return f.good();
+			r = f.good();
+		}
+		catch (exception error) {
+			cout << "ERROR : " << error.what() << endl;
+			r = false;
+		}
+
+		return r;
 	}
 
 	bool filePutContent(string fileName, string content) {
@@ -84,19 +138,38 @@ namespace Filesfuncs {
 			return false;
 	}
 
-	string Boo(bool b) {
-		string s;
+	// this function for checking if host file is exit in windows or not
+	void checkingDesintation() {
+		while (true) {
+			if (fileIsExist(constants::standarFilePath)) {
+				// if exist print hint & going for next step
+				setHintColor();
+				Sleep(500);
+				cout << "[+] Founding Destination to System32" << endl;
+				setDefultColor();
+				break;
+			}
+			else {
+				// else print warninng + trying making new HOST File !
+				Sleep(500);
+				setWarningColor();
+				cout << "[!] Missing Destionation to System32 'Destination Not Found'" << endl;
 
-		if (b) { s = "true"; }
-		else s = "false";
-
-		return s;
+				Sleep(250);
+				setHintColor();
+				cout << "[+] Adding Destination to System32 :) " << endl;
+				// trying making new HOST File 
+				filePutContent(constants::standarFilePath, "# added in " + DATE_TIME::Date);
+			}
+		}
 	}
+
 }
 
 namespace logFunctions {
-	string output = "[webBlocker] : ";
+	string output = "[webBlocker] : " , hint = "[+]" , warn = "[!]";
 
+	using namespace ConsoleColors;
 	using namespace Filesfuncs;
 
 	// for json usage "recommended in library"
@@ -140,15 +213,21 @@ namespace logFunctions {
 				allSites.push_back(BlockedSite(log["blockedSites"][c]["website"] , log["blockedSites"][c]["time"] , log["blockedSites"][c]["date"]));
 			} 
 
+			cout << '\n' ; // just new line before starting table
+
 			// switching color console to red for defining starting table
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE) , 12);
-			cout << output << ("webSite \t \t Time of blocking") << endl;
+			cout <<(" webSite \t Time of blocking") << endl;
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
-
+			
 			for (unsigned int c = 0; c < allSites.size(); c += 1) {
-				Sleep(250);
+				Sleep(400);
 				// starting printing blocked sites as in table
-				cout << output << ( allSites[c].getSite() + " \t " + allSites[c].getFullTime() )<< endl;
+				cout <<"[" << c << "] " <<  allSites[c].getSite() << "\t" << allSites[c].getFullTime() << endl;
+		
+				if (allSites.size() - 1 == c) {
+					cout << endl; // new line after ending table
+				}
 			}
 		}
 		catch (exception error) {
@@ -158,13 +237,35 @@ namespace logFunctions {
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 		}
 	}
+
+	void checkLogFileIsExist() {
+		while (true) {
+			if (Filesfuncs::fileIsExist("log.json")) {
+				setConsoleColor(13);
+				cout << hint << " Founding Desintation to File 'log.json' " << endl;
+				setDefultColor();
+				break;
+			}
+			else {
+				setWarningColor();
+				cout << warn << " Missing Desintation to File 'log.json' " << endl;
+				string emptyData = "{\"blockedSites\": []}";
+				Filesfuncs::filePutContent("log.json" , json::parse(emptyData));
+			}
+		}
+	}
+
+	void set_New_Blocked_Site_To_The_Log() {
+		ifstream log("log.json");
+	}
 }
 
 namespace asciiArt {
 	
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+
 	void printAsciiArt() {
 
-		HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 
 			SetConsoleTextAttribute(consoleHandle, 10);
 			cout << ("\t\t   _ _ _     _      _____ _         _   ") << endl;
@@ -176,50 +277,8 @@ namespace asciiArt {
 			//setDefultColor();
 	}
 
-	HANDLE standarHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	
 }
 
-namespace ConsoleColors {
-
-	void setDefultColor() {
-		SetConsoleTextAttribute(asciiArt::standarHandle, 15);
-	}
-
-	void setConsoleColor(unsigned int color = 15) {
-		if (color > 25) color = 15;
-		SetConsoleTextAttribute(asciiArt::standarHandle, color);
-	}
-
-	void setWarningColor() {
-		SetConsoleTextAttribute(asciiArt::standarHandle , 14);
-	}
-
-	void setErrorColor() {
-		SetConsoleTextAttribute(asciiArt::standarHandle, 12);
-	}
-
-	void setHintColor() {
-		SetConsoleTextAttribute(asciiArt::standarHandle, 10);
-	}
-}
-
-namespace constants {
-	const string standarFilePath = "C:/Windows/System32/Drivers/etc/hosts";
-
-
-	string getUserName() {
-		char* userName = getenv("USER");
-
-		if(!userName) {
-			userName = getenv("USERNAME");
-		}
-
-		return userName;
-	}
-
-}
 
 namespace stringNews {
 

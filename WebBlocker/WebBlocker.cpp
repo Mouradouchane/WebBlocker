@@ -30,31 +30,7 @@ using namespace DATE_TIME;
 using namespace stringNews;
 using namespace logFunctions;
 
-// this function for checking if host file is exit in windows or not
-void checkingDesintation() {
-	while (true) {
-		if (fileIsExist(standarFilePath)) {
-			// if exist print hint & going for next step
-			setHintColor();
-			Sleep(500);
-			cout << "[+] Founding Destination to System32" << endl;
-			setDefultColor();
-			break;
-		}
-		else {
-			// else print warninng + trying making new HOST File !
-			Sleep(500);
-			setWarningColor();
-			cout << "[!] Missing Destionation to System32 'Destination Not Found'" << endl;
 
-			Sleep(250);
-			setHintColor();
-			cout << "[+] Adding Destination to System32 :) " << endl;
-			// trying making new HOST File 
-			filePutContent(standarFilePath, "# added in " + Date);
-		}
-	}
-}
 
 int main(){
 
@@ -105,12 +81,19 @@ int main(){
 
 	Sleep(500);
 	
-	// checking host file 
+	// checking host file if exist or not
 	checkingDesintation();
-	
+	Sleep(500);
+
+	// checking log file if exist or not 
+	checkLogFileIsExist();
+	Sleep(500);
+
 	setWarningColor();
 	cout << "[!] Note : All websites that you place as a user It will be blocked \n \t   until the next formatting" << endl;
-	
+	Sleep(500);
+
+
 	setDefultColor();
 
 	cout << "webBlocker : -h or --help" << endl;
@@ -153,7 +136,8 @@ int main(){
 				cout << commandsHELP[c] << endl <<endl;
 			}
 		}
-		else if (command == "webBlocker --log" || command == "webBlocker -l") {
+		else if (command == "webBlocker --log" || command == "webBlocker -l" || command == "log") {
+
 			// calling this funtion in WebBlocker.h for reading and printing all 
 			// blocked sites in log.json file
 			printAllBlockedSitesInLog();
