@@ -75,6 +75,7 @@ namespace Filesfuncs {
 	using namespace ConsoleColors;
 
 	string readAll(string fileName , bool OpenAsBinary = false) {
+		try {
 
 		// define var for opening file
 		ifstream fName;
@@ -105,6 +106,13 @@ namespace Filesfuncs {
 		fName.close();
 		// return all content in file or -1
 		return content;
+		}
+		catch (exception error) {
+			cout << "ERROR : " << error.what() << endl;
+			return "";
+		}
+		
+		return "";
 	}
 
 	bool fileIsExist(string fileName) {
@@ -261,17 +269,43 @@ namespace logFunctions {
 		}
 	}
 
+	bool isFileEmpty(ifstream &file) {
+		if (file.peek() == EOF) return true;
+		else return false;
+	}
+
 	void set_New_Blocked_Site_To_The_Log(string site) {
 		json newData = json::parse(readAll("log.json"));
 		BlockedSite newSite(site);
+		
+		cout << newData << endl << endl;
 
-		cout << newData << newData.size() << endl;
+		newData["blockedSites"].push_back(
+			{ "website:" + newSite.getSite() + ", time:" + newSite.getTime() + ", date:" + newSite.getDate() }
+		);
 
-		newData["blockedSites"].push_back({
-			"website:" + newSite.getSite() + ", time:" + newSite.getTime() + ", date:" + newSite.getDate()
-		});
+		try {
+			ifstream log("log.json", ios_base::in);
+				
+			if (!isFileEmpty(log)) {
 
-		cout << newData << newData.size() << endl;
+				char str[] = "this is new string";
+
+				cout << "size is : " + sizeof(log) << endl;
+			}
+
+			/*ifstream log("log.json", 'w');
+			
+			if ( log.is_open() and log.good() ) cout << "log file is opened" << endl << "file is good for usage 'ready'" << endl;
+			else cout << "log file not opened" << endl << "file isn't good not ready for usage" << endl;
+
+			log.close();
+
+			*/
+		}
+		catch (exception error) {
+			cout << "ERROR : " << error.what() << endl;
+		}
 	}
 }
 
