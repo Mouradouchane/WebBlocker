@@ -1,2 +1,3 @@
 ﻿  WebBlocker.cpp
+C:\Users\dev\Desktop\WebBlocker\WebBlocker\WebBlocker.h(330,26): warning C4018: '<': signed/unsigned mismatch
   WebBlocker.vcxproj -> C:\Users\dev\Desktop\WebBlocker\Debug\WebBlocker.exe

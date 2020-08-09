@@ -252,6 +252,13 @@ namespace logFunctions {
 			}
 		}
 		catch (exception error) {
+
+			/*
+			
+				- exception here need fix later !
+			
+			*/
+
 			// if error happen
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 			cout <<"Void List : " << error.what() <<endl;
@@ -300,7 +307,37 @@ namespace logFunctions {
 			}
 		}
 	}
+	
+	void appendNewBlockedSiteToLog(string newsite = "") {
+
+		string data = Filesfuncs::readAll("log.json");
+		auto jsonData = json::parse(data);
+		auto newData = json::object({});
+		
+		newData["website"] = newsite;
+		newData["time"] = __TIME__;
+		newData["date"] = __DATE__;
+
+		jsonData["blockedSites"].push_back(newData);
+
+
+		string strData = jsonData.dump();
+
+		cout << strData << strData.length() << endl;
+
+		ofstream log("log.json", ios_base::trunc);
+		
+		for (long int i = 0; i < strData.length(); i += 1) {
+			log.put(strData[i]);
+		}
+	
+		log.close();
+
+	}
+
 }
+
+
 
 namespace asciiArt {
 	
