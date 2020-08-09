@@ -76,43 +76,39 @@ namespace Filesfuncs {
 
 	string readAll(string fileName , bool OpenAsBinary = false) {
 		try {
+			// define var for opening file
+			ifstream fName;
+			// open file as binary or not
+			if (!OpenAsBinary) fName = ifstream(fileName);
+			else fName = ifstream(fileName, std::ifstream::binary);
 
-		// define var for opening file
-		ifstream fName;
+			string content, line;
 
-		// open file as binary or not
-		if (!OpenAsBinary) fName = ifstream(fileName);
-		else fName = ifstream(fileName, std::ifstream::binary);
+			// if file is open correctlly
+			if (fName.is_open()) {
 
-		string content, line;
+				// start reading line by line
+				while (getline(fName, line))
+				{
+					// adding line + new line 
+					content += line + "\n";
+				}
 
-		// if file is open correctlly
-		if (fName.is_open()) {
-
-			// start reading line by line
-			while (getline(fName, line))
-			{
-				// adding line + new line 
-				content += line + "\n";
+			}
+			else {
+				// when file not open or not exit returning -1
+				content = -1;
 			}
 
-		}
-		else {
-			// when file not open or not exit returning -1
-			content = -1;
-		}
-
-		// closing file in end
-		fName.close();
-		// return all content in file or -1
-		return content;
+			// closing file in end
+			fName.close();
+			// return all content in file or -1
+			return content;
 		}
 		catch (exception error) {
 			cout << "ERROR : " << error.what() << endl;
 			return "";
 		}
-		
-		return "";
 	}
 
 	bool fileIsExist(string fileName) {
@@ -136,9 +132,7 @@ namespace Filesfuncs {
 
 			// if open putting content
 			if (fName.is_open()) {
-				
 				fName << "\n" <<content << endl;
-
 				fName.close();
 				return true;
 			}
@@ -180,15 +174,14 @@ namespace logFunctions {
 	using namespace ConsoleColors;
 	using namespace Filesfuncs;
 
-	// for json usage "recommended in library"
-	using json = nlohmann::json;
+		// for json usage "recommended in library"
+		using json = nlohmann::json;
+		
+		// opening log.json and getting all data on it as string
+		string jsonAsString = readAll("log.json");
 
-	// opening log.json and getting all data on it as string
-	string jsonAsString = readAll("log.json" );
+	
 
-
-	// parsing log data from ' jsonAsString '
-	auto log = json::parse(jsonAsString);
 
 	// class for getting all blocked sites in json varible after parse :)
 	class BlockedSite {
@@ -217,14 +210,19 @@ namespace logFunctions {
 	};
 
 	void printAllBlockedSitesInLog() {
+		try {
 		// vector of BlockedSite of Get on it all sites as objects from ' log '
 		vector<BlockedSite> allSites;
 
-		try {
+		// parsing log data from ' jsonAsString '
+		auto log = json::parse(jsonAsString);
+
 			// get all from 'log' to 'vector allSites'
 			for (unsigned int c = 0; c < log["blockedSites"].size(); c += 1) {
 				// pushing new objects to vector 
+				if (!log["blockedSites"].empty()) {
 				allSites.push_back(BlockedSite(log["blockedSites"][c]["website"] , log["blockedSites"][c]["time"] , log["blockedSites"][c]["date"]));
+				}
 			} 
 
 			cout << '\n' ; // just new line before starting table
@@ -234,14 +232,22 @@ namespace logFunctions {
 			cout <<(" webSite \t Time of blocking") << endl;
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 			
-			for (unsigned int c = 0; c < allSites.size(); c += 1) {
-				Sleep(400);
-				// starting printing blocked sites as in table
-				cout <<"[" << c << "] " <<  allSites[c].getSite() << "\t" << allSites[c].getFullTime() << endl;
-		
-				if (allSites.size() - 1 == c) {
-					cout << endl; // new line after ending table
+			// printing data if array not empty
+			if (!allSites.empty()) {
+				for (unsigned int c = 0; c < allSites.size(); c += 1) {
+					Sleep(400);
+					// starting printing blocked sites as in table
+					cout << "[" << c << "] " << allSites[c].getSite() << "\t" << allSites[c].getFullTime() << endl;
+
+
+					if (allSites.size() - 1 == c) {
+						cout << endl; // new line after ending table
+					}
 				}
+			}
+			else {
+				setHintColor();
+				cout << output << "there is no blocked sites !" << endl;
 			}
 		}
 		catch (exception error) {
@@ -251,6 +257,7 @@ namespace logFunctions {
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 		}
 	}
+
 
 	void checkLogFileIsExist() {
 		while (true) {
@@ -264,49 +271,26 @@ namespace logFunctions {
 				setWarningColor();
 				cout << warn << " Missing Desintation to File 'log.json' " << endl;
 				string emptyData = "{\"blockedSites\": []}";
-				Filesfuncs::filePutContent("log.json" , json::parse(emptyData));
+				Filesfuncs::filePutContent("log.json", emptyData);
 			}
 		}
 	}
 
-	bool isFileEmpty(ifstream &file) {
-		if (file.peek() == EOF) return true;
-		else return false;
-	}
+	// if log.json not exist or deleted
+	void IfLogNotExist() {
 
-	void set_New_Blocked_Site_To_The_Log(string site) {
-		json newData = json::parse(readAll("log.json"));
-		BlockedSite newSite(site);
+		const string name = "log.json" , JsonBaseFile = "{\"blockedSites\": []}";
+
+		ofstream log(name, ios_base::trunc);
+
+		// trying puting basic content in log.json for avoiding error json::parse() function
+		filePutContent(name , JsonBaseFile);
 		
-		cout << newData << endl << endl;
+		// checking and show to user if file is exist now or not 'again'
+		checkLogFileIsExist();
 
-		newData["blockedSites"].push_back(
-			{ "website:" + newSite.getSite() + ", time:" + newSite.getTime() + ", date:" + newSite.getDate() }
-		);
-
-		try {
-			ifstream log("log.json", ios_base::in);
-				
-			if (!isFileEmpty(log)) {
-
-				char str[] = "this is new string";
-
-				cout << "size is : " + sizeof(log) << endl;
-			}
-
-			/*ifstream log("log.json", 'w');
-			
-			if ( log.is_open() and log.good() ) cout << "log file is opened" << endl << "file is good for usage 'ready'" << endl;
-			else cout << "log file not opened" << endl << "file isn't good not ready for usage" << endl;
-
-			log.close();
-
-			*/
-		}
-		catch (exception error) {
-			cout << "ERROR : " << error.what() << endl;
-		}
 	}
+
 }
 
 namespace asciiArt {
