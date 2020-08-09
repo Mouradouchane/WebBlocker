@@ -93,13 +93,9 @@ int main(){
 	setWarningColor();
 	cout << "[!] Note : All websites that you place as a user It will be blocked \n \t   until the next formatting" << endl;
 	Sleep(500);
-
-
+	
 	setDefultColor();
-
 	cout << "webBlocker : -h or --help" << endl;
-
-	setDefultColor();
 
 	/*
 		- this for getting user input
@@ -116,7 +112,7 @@ int main(){
 		"-l or --log for watching list of blocked sites + time",
 	};
 
-	const string AppVersion = "version 1 beta none stable";
+	const string AppVersion = "version 1 none stable";
 
 	while (true) {
 
@@ -140,7 +136,7 @@ int main(){
 		else if (command == "webBlocker --log" || command == "webBlocker -l" || command == "log") {
 
 			// calling this funtion in WebBlocker.h for reading and printing all 
-			// blocked sites in log.json file
+			// blocked sites in array from log.json file
 			printAllBlockedSitesInLog();
 
 		}

@@ -180,9 +180,6 @@ namespace logFunctions {
 		// opening log.json and getting all data on it as string
 		string jsonAsString = readAll("log.json");
 
-	
-
-
 	// class for getting all blocked sites in json varible after parse :)
 	class BlockedSite {
 		private : 
@@ -223,6 +220,9 @@ namespace logFunctions {
 				if (!log["blockedSites"].empty()) {
 				allSites.push_back(BlockedSite(log["blockedSites"][c]["website"] , log["blockedSites"][c]["time"] , log["blockedSites"][c]["date"]));
 				}
+				else {
+					break;
+				}
 			} 
 
 			cout << '\n' ; // just new line before starting table
@@ -248,49 +248,58 @@ namespace logFunctions {
 			else {
 				setHintColor();
 				cout << output << "there is no blocked sites !" << endl;
+				setDefultColor();
 			}
 		}
 		catch (exception error) {
+			// if error happen
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-			cout <<"ERROR : " << error.what() <<endl;
+			cout <<"Void List : " << error.what() <<endl;
+			setHintColor();
+			cout << output << "there is no blocked sites !" << endl;
 			// backing to default color
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+			setDefultColor();
 		}
 	}
 
+	string BasicDataForNewJsonFile = "{\"blockedSites\": []}";
 
+	void checkLogFileIfEmpty() {
+		string log = "log.json";
+		ifstream fl(log, ios_base::app);
+
+		if (fl.peek() == EOF) {
+			// if is empty file 
+			filePutContent(log , BasicDataForNewJsonFile);
+		}
+
+	}
+
+	// checking if log.json exist or not , if not making new log.json file 
+	// and put on it basic data from ' BasicDataForNewJsonFile '
 	void checkLogFileIsExist() {
 		while (true) {
 			if (Filesfuncs::fileIsExist("log.json")) {
+				// message 
 				setConsoleColor(13);
 				cout << hint << " Founding Desintation to File 'log.json' " << endl;
 				setDefultColor();
+
+				//check if file is empty or have basics
+				checkLogFileIfEmpty();
+
+				// and then stop loop and out this function
 				break;
 			}
 			else {
 				setWarningColor();
 				cout << warn << " Missing Desintation to File 'log.json' " << endl;
-				string emptyData = "{\"blockedSites\": []}";
-				Filesfuncs::filePutContent("log.json", emptyData);
+				cout << hint << " Making New Desintation to New File 'log.json' " << endl;
+				// try making file from scratch 
+				Filesfuncs::filePutContent("log.json", BasicDataForNewJsonFile);
 			}
 		}
 	}
-
-	// if log.json not exist or deleted
-	void IfLogNotExist() {
-
-		const string name = "log.json" , JsonBaseFile = "{\"blockedSites\": []}";
-
-		ofstream log(name, ios_base::trunc);
-
-		// trying puting basic content in log.json for avoiding error json::parse() function
-		filePutContent(name , JsonBaseFile);
-		
-		// checking and show to user if file is exist now or not 'again'
-		checkLogFileIsExist();
-
-	}
-
 }
 
 namespace asciiArt {
