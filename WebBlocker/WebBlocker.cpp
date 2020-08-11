@@ -32,11 +32,8 @@ using namespace stringNews;
 using namespace logFunctions;
 
 
-
 int main(){
-
-	appendNewBlockedSiteToLog("gta5.com");
-
+	
 	/*
 		ofstream 	Creates and writes to files
 		ifstream 	Reads from files
@@ -47,13 +44,13 @@ int main(){
 		Program start 
 		set console title as first step
 	*/
-	SetConsoleTitle(TEXT("WebBlocker v1.0"));
+	SetConsoleTitle(TEXT("WebBlocker v1"));
 
 	printAsciiArt();
 	setDefultColor();
 
 	Sleep(500); // just sleeping for nice transition :)
-	cout << "Welcome to WebBlocker v1.0 Beta ..." + Date << endl; // printing Date in starting
+	cout << "Welcome to WebBlocker v1 stable ..." + Date << endl; // printing Date in starting
 
 	Sleep(500); // just sleeping for nice transition :)
 
@@ -154,8 +151,8 @@ int main(){
 				if (targetweb != " " && targetweb != "" && 
 					starts_with(targetweb , "www.") != true &&
 					starts_with(targetweb , "https://") != true &&
-					starts_with(targetweb, "https::") != true &&
-					starts_with(targetweb, "http://") != true &&
+					starts_with(targetweb,	"https::") != true &&
+					starts_with(targetweb,	"http://") != true &&
 					include(targetweb , '.')
 					) {
 
@@ -174,8 +171,12 @@ int main(){
 					filePutContent(standarFilePath, "127.0.0.1 https://www." + targetweb);
 					filePutContent(standarFilePath, "127.0.0.1 http://www." + targetweb);
 
+					// when programme do all steps should append new blocked site to log.json
+					// bay using appendNewBlockedSiteToLog();
+					appendNewBlockedSiteToLog(targetweb);
+
+					// show to user success message 
 					cout << " blocking web " << " => " << targetweb << endl;
-					
 				}
 				else {
 					Sleep(250);

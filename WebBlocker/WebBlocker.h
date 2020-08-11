@@ -30,19 +30,23 @@ namespace constants {
 }
 
 namespace DATE_TIME {
-	time_t tm = time(0);
-	struct tm* timeObject = localtime(&tm);
+	string getFormatedDate() {
 
-	short day = timeObject->tm_mday, mouth = (timeObject->tm_mon + 1);
-	int year = (timeObject->tm_year + 1900);
+		time_t TIME = time(0);
+		struct tm* timeObject = localtime(&TIME);
 
-	void PrintDate(string newL = "") {
-		cout << day << '/' << mouth << '/' << year << newL;
+		short day = timeObject->tm_mday, mouth = (timeObject->tm_mon + 1);
+		int year = (timeObject->tm_year + 1900);
+			
+		
+		string t = string(day + "/" + mouth) + (" " +  year);
+		return t;
 	}
 
 	string Date = "[" __TIME__  "]";
 }
 
+using namespace DATE_TIME;
 
 namespace ConsoleColors {
 
@@ -186,7 +190,7 @@ namespace logFunctions {
 			string website, fullTime , domin , date , time;
 
 		public :
-			BlockedSite(string website , string time = __TIME__ , string date = __DATE__) {
+			BlockedSite(string website , string time = __TIME__ , string date =  getFormatedDate()) {
 				this->website = website;
 				this->fullTime = (time + " " + date);
 				this->date = date;
@@ -217,6 +221,7 @@ namespace logFunctions {
 			// get all from 'log' to 'vector allSites'
 			for (unsigned int c = 0; c < log["blockedSites"].size(); c += 1) {
 				// pushing new objects to vector 
+				// objects === blocked sites stored in json file
 				if (!log["blockedSites"].empty()) {
 				allSites.push_back(BlockedSite(log["blockedSites"][c]["website"] , log["blockedSites"][c]["time"] , log["blockedSites"][c]["date"]));
 				}
@@ -256,6 +261,7 @@ namespace logFunctions {
 			/*
 			
 				- exception here need fix later !
+
 			
 			*/
 
@@ -316,14 +322,11 @@ namespace logFunctions {
 		
 		newData["website"] = newsite;
 		newData["time"] = __TIME__;
-		newData["date"] = __DATE__;
+		newData["date"] = getFormatedDate();
 
 		jsonData["blockedSites"].push_back(newData);
 
-
 		string strData = jsonData.dump();
-
-		cout << strData << strData.length() << endl;
 
 		ofstream log("log.json", ios_base::trunc);
 		
