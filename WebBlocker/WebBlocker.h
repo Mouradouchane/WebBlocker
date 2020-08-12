@@ -3,6 +3,7 @@
 #include <fstream>
 // for string usage
 #include <string>
+#include <sstream>
 #include <vector>
 // for win API
 #include <Windows.h>
@@ -32,15 +33,24 @@ namespace constants {
 namespace DATE_TIME {
 	string getFormatedDate() {
 
-		time_t TIME = time(0);
-		struct tm* timeObject = localtime(&TIME);
+		time_t TE = time(0);
+		struct tm* timeObject = localtime(&TE);
 
-		short day = timeObject->tm_mday, mouth = (timeObject->tm_mon + 1);
-		int year = (timeObject->tm_year + 1900);
-			
-		
-		string t = string(day + "/" + mouth) + (" " +  year);
-		return t;
+		// problem who do wired date formate here in this function
+
+		int dt[] = { timeObject->tm_mday , timeObject->tm_mon + 1 , timeObject->tm_year + 1900 };
+		string stv;
+
+		int size = (sizeof(dt) / sizeof(int));
+
+		for (int i = 0 ; i < size ; i += 1) {
+			stv += std::to_string(dt[i]);
+			if ( size - 1 != i) {
+				stv += "/";
+			}
+		}
+
+		return stv;
 	}
 
 	string Date = "[" __TIME__  "]";
@@ -348,7 +358,6 @@ namespace asciiArt {
 
 	void printAsciiArt() {
 
-
 			SetConsoleTextAttribute(consoleHandle, 10);
 			cout << ("\t\t   _ _ _     _      _____ _         _   ") << endl;
 			cout << ("\t\t  | | | |___| |_   | __  | |___ ___| |_ ___ ___ ") << endl;
@@ -356,7 +365,7 @@ namespace asciiArt {
 			cout << ("\t\t  |_____|___|___|  |_____|_|___|___|_,_|___|_| v1.0") << endl;
 			SetConsoleTextAttribute(consoleHandle, 13);
 			cout << ("================================================================================") << endl;
-			//setDefultColor();
+			ConsoleColors::setDefultColor();
 	}
 
 }

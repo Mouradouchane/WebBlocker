@@ -33,7 +33,7 @@ using namespace logFunctions;
 
 
 int main(){
-	
+
 	/*
 		ofstream 	Creates and writes to files
 		ifstream 	Reads from files
@@ -108,6 +108,7 @@ int main(){
 		"-v or --version for programme version",
 		"-b or --block for blocking website \nNote! : enter target web site without 'Protocole http|https|...' \nNote! : enter target web without 'www.' \nEx: ex.com",
 		"-l or --log for watching list of blocked sites + time",
+		"-c or --clear for clearing console outputs"
 	};
 
 	const string AppVersion = "version 1 none stable";
@@ -138,6 +139,12 @@ int main(){
 			printAllBlockedSitesInLog();
 
 		}
+		else if (command == "clear" || command == "webBlocker --clear" || command == "webBlocker -c") {
+			// clear cmd or console
+			system("cls");
+			// print ascii art from scratch :)
+			printAsciiArt();
+		}
 		else if (starts_with(command, "webBlocker --block") || starts_with(command , "webBlocker -b")) {
 			
 			vector<string> vars = split(command , " ");
@@ -167,9 +174,9 @@ int main(){
 					setDefultColor();
 				
 					filePutContent(standarFilePath , "127.0.0.1 " + targetweb);
-					filePutContent(standarFilePath, "127.0.0.1 www." + targetweb);
-					filePutContent(standarFilePath, "127.0.0.1 https://www." + targetweb);
-					filePutContent(standarFilePath, "127.0.0.1 http://www." + targetweb);
+					filePutContent(standarFilePath , "127.0.0.1 www." + targetweb);
+					filePutContent(standarFilePath , "127.0.0.1 https://www." + targetweb);
+					filePutContent(standarFilePath , "127.0.0.1 http://www." + targetweb);
 
 					// when programme do all steps should append new blocked site to log.json
 					// bay using appendNewBlockedSiteToLog();
