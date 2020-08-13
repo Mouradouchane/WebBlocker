@@ -1,3 +1,23 @@
 ﻿  WebBlocker.cpp
 C:\Users\dev\Desktop\WebBlocker\WebBlocker\WebBlocker.h(343,26): warning C4018: '<': signed/unsigned mismatch
+C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.rh(21,1): warning C4005: 'RT_MANIFEST': macro redefinition
+C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(282): message : see previous definition of 'RT_MANIFEST'
+C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.rh(22,1): warning C4005: 'CREATEPROCESS_MANIFEST_RESOURCE_ID': macro redefinition
+C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(283): message : see previous definition of 'CREATEPROCESS_MANIFEST_RESOURCE_ID'
+C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.rh(23,1): warning C4005: 'ISOLATIONAWARE_MANIFEST_RESOURCE_ID': macro redefinition
+C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(284): message : see previous definition of 'ISOLATIONAWARE_MANIFEST_RESOURCE_ID'
+C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.rh(24,1): warning C4005: 'ISOLATIONAWARE_NOSTATICIMPORT_MANIFEST_RESOURCE_ID': macro redefinition
+C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(285): message : see previous definition of 'ISOLATIONAWARE_NOSTATICIMPORT_MANIFEST_RESOURCE_ID'
+C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.rh(25,1): warning C4005: 'ISOLATIONPOLICY_MANIFEST_RESOURCE_ID': macro redefinition
+C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(286): message : see previous definition of 'ISOLATIONPOLICY_MANIFEST_RESOURCE_ID'
+C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.rh(26,1): warning C4005: 'ISOLATIONPOLICY_BROWSER_MANIFEST_RESOURCE_ID': macro redefinition
+C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(287): message : see previous definition of 'ISOLATIONPOLICY_BROWSER_MANIFEST_RESOURCE_ID'
+C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.rh(27,1): warning C4005: 'MINIMUM_RESERVED_MANIFEST_RESOURCE_ID': macro redefinition
+C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(288): message : see previous definition of 'MINIMUM_RESERVED_MANIFEST_RESOURCE_ID'
+C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.rh(28,1): warning C4005: 'MAXIMUM_RESERVED_MANIFEST_RESOURCE_ID': macro redefinition
+C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(289): message : see previous definition of 'MAXIMUM_RESERVED_MANIFEST_RESOURCE_ID'
+C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winres.h(35,1): warning C4005: 'LB_ADDSTRING': macro redefinition
+C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(11682): message : see previous definition of 'LB_ADDSTRING'
+C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winres.h(36,1): warning C4005: 'CB_ADDSTRING': macro redefinition
+C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(11830): message : see previous definition of 'CB_ADDSTRING'
   WebBlocker.vcxproj -> C:\Users\dev\Desktop\WebBlocker\Debug\WebBlocker.exe

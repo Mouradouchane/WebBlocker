@@ -144,10 +144,17 @@
     <ClCompile Include="WebBlocker.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="WebBlocker.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="log.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="WebBlocker.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

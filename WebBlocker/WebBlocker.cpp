@@ -15,6 +15,14 @@
 // for multi usage in programme
 #include "WebBlocker.h"
 
+// including icon resource
+#include "resource.h"
+//#include "WebBlocker.rc"
+#include "winres.h"
+
+HINSTANCE hInstance;
+HICON icon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON1));
+
 // checking system if windows as first step
 #ifdef __unix__
 	#define isUNIX 1
@@ -35,10 +43,9 @@ using namespace logFunctions;
 int main(){
 
 	/*
-		ofstream 	Creates and writes to files
-		ifstream 	Reads from files
-		fstream 	A combination of ofstream and ifstream: creates, reads, and writes to files
+		icon part : before start
 	*/
+
 
 	/*	
 		Program start 
