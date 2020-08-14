@@ -1,3 +1,4 @@
+
 // for files read and wirte ...
 #include <iostream>
 #include <fstream>
@@ -16,12 +17,12 @@
 #include "WebBlocker.h"
 
 // including icon resource
+#include <winres.h>
+#include <WinUser.h>
 #include "resource.h"
-//#include "WebBlocker.rc"
-#include "winres.h"
 
-HINSTANCE hInstance;
-HICON icon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON1));
+//HINSTANCE hInstance; 
+HICON icon = LoadIcon(NULL, MAKEINTRESOURCE(IDI_ICON1));
 
 // checking system if windows as first step
 #ifdef __unix__
@@ -118,7 +119,7 @@ int main(){
 		"-c or --clear for clearing console outputs"
 	};
 
-	const string AppVersion = "version 1 none stable";
+	const string AppVersion = "version 1 stable";
 
 	while (true) {
 

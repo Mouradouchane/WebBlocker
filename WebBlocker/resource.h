@@ -2,8 +2,9 @@
 // Microsoft Visual C++ generated include file.
 // Used by WebBlocker.rc
 //
-#define IDI_ICON1                       101
 
+
+#define IDI_ICON1  101
 
 // Next default values for new objects
 // 
@@ -15,5 +16,3 @@
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
-
-
