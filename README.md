@@ -25,15 +25,16 @@ it's a **small and fast** program to blocking web sites to **the next formatting
 
 ## usage :
   - after you extract zip file .
-  - go to **Debug folder** and open **WebBlocker.exe** .
-  - then should open **WebBlocker** as **console application** .
+  - if you have **windows 32bit** go to : **Debug folder** and open **WebBlocker.exe** 
+    or go to **WebBlocker** folder directlly and open **WebBlocker.exe**  both ways are the same.
+  - then should open **WebBlocker v1** as **console application** .
 
   - **for see all commands avalible in programme try enter :**
   ``` 
   help or webBlocker --help or webBlocker -h 
   ```
-  - for block website or multiple websites use :
-  NOTE! : don't use **www.** or **http:** or **https:** or **special charachters** just 'address.domain'
+  - for **block website or multiple websites** :
+  NOTE! : don't use : **www.** or **http:** or **https:** or **special charachters** just 'address.domain'
   ```
   webBlocker -b address.domain address.domain ... 
   ```
