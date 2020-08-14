@@ -1,4 +1,4 @@
-# WebBlocker Beta v1 : *none stable*
+# WebBlocker Beta v1 : *stable*
 
 
 
@@ -7,19 +7,14 @@ it's a **small and fast** program to blocking web sites to **the next formatting
 
 
 
-## how WebBlocker work :
-**webBlocker** work in simple and easy way by using **windows hosts** for blocking target websites.
-
-
-
 ## requirement  :
-- **windows operating system** .
+- **windows operating system** 32bit or 64bit .
 - **maybe** C++ runtime requirement .
 
 
 
 ## download :
-- if you familiar with 'git version control' you can make a simple **clone** directly :
+- if you familiar with 'git version control' you can make a simple **clone** directly by using following command :
 ```
   git clone https://github.com/Mouradouchane/WebBlocker.git
 ```
@@ -35,19 +30,18 @@ it's a **small and fast** program to blocking web sites to **the next formatting
 
   - **for see all commands avalible in programme try enter :**
   ``` 
-  help or webBlocker --help
+  help or webBlocker --help or webBlocker -h 
   ```
   - for block website or multiple websites use :
-  NOTE! : don't use **\www.** or **http:** or **https:** or **special charachters** just 'address.domain'
+  NOTE! : don't use **www.** or **http:** or **https:** or **special charachters** just 'address.domain'
   ```
   webBlocker -b address.domain address.domain ... 
   ```
-  - for ex : ``` webBlocker -b xvvx.com ggtr.net oppo.tv ```
+  - for ex : ``` webBlocker -b xvttx.com ggtr.net oopvv.tv ```
 
   - **if** your command written and **worked correctly** you should get message from WebBlocker say :
   ```
   [webBlocker] : blocking web => address.domain
   ```
   - else you see warning message probably this message content is invalid format .
-  
   
