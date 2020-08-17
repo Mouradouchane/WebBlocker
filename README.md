@@ -3,7 +3,7 @@
 
 
 ## about :
-it's a **small and fast** program to blocking web sites to **the next formatting of pc** without step back .
+it's a **small and fast** program for blocking web sites to **the next formatting of pc** without step back .
 
 
 
