@@ -52,13 +52,13 @@ int main(){
 		Program start 
 		set console title as first step
 	*/
-	SetConsoleTitle(TEXT("WebBlocker v1"));
+	SetConsoleTitle(TEXT("WebBlocker v2"));
 
 	printAsciiArt();
 	setDefultColor();
 
 	Sleep(500); // just sleeping for nice transition :)
-	cout << "Welcome to WebBlocker v1 stable ..." + Date << endl; // printing Date in starting
+	cout << "Welcome to WebBlocker v2 stable ..." + Date << endl; // printing Date in starting
 
 	Sleep(500); // just sleeping for nice transition :)
 
@@ -119,7 +119,7 @@ int main(){
 		"-c or --clear for clearing console outputs"
 	};
 
-	const string AppVersion = "version 1 stable";
+	const string AppVersion = "version 2 stable";
 
 	while (true) {
 
