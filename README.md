@@ -23,7 +23,9 @@ it's a **small and fast** program for blocking web sites to **the next formattin
 ## download :
 - if you familiar with 'git version control' you can make a simple **clone** directly by using following command :
 ```
-  git clone https://github.com/Mouradouchane/WebBlocker.git
+  =========================================================================
+        git clone https://github.com/Mouradouchane/WebBlocker.git
+  =========================================================================
 ```
 
 - if you're not familiar with 'git version control' follow this steps :
@@ -32,24 +34,39 @@ it's a **small and fast** program for blocking web sites to **the next formattin
 
 ## usage :
   - after you extract zip file .
+  
   - if you have **windows 32bit** go to : **Debug folder** and open **WebBlocker.exe ' as admin '**
     or go to **WebBlocker** folder directlly and open **WebBlocker.exe**  both ways are the same.
-  - then should open **WebBlocker v1** as **console application** .
+    
+  - then should open **WebBlocker v2** as **console application** .
 
-  - **for see all commands avalible in programme try enter :**
+  - **for see all commands avalible in program try enter :**
+  
   ``` 
-  help or webBlocker --help or webBlocker -h 
+  =========================================================================
+        help or webBlocker --help or webBlocker -h 
+  =========================================================================
   ```
   - for **block website or multiple websites** :
   NOTE! : don't use : **www.** or **http:** or **https:** or **special charachters** just 'address.domain'
   ```
-  webBlocker -b address.domain address.domain ... 
+  =========================================================================
+        webBlocker -b address.domain address.domain ... 
+  =========================================================================
   ```
-  - for ex : ``` webBlocker -b xvttx.com ggtr.net oopvv.tv ```
+  ### example 
+  
+  ```
+  =========================================================================
+        webBlocker -b example1.com example2.net example3.tv  
+  =========================================================================
+  ```
 
   - **if** your command written and **worked correctly** you should get message from WebBlocker say :
   ```
-  [webBlocker] : blocking web => address.domain
+  =========================================================================
+        [webBlocker] : blocking web => address.domain
+  =========================================================================
   ```
   - else you see warning message probably this message content is invalid format .
   
