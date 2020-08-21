@@ -1,4 +1,11 @@
-# WebBlocker Beta v1 : *stable*
+# WebBlocker Beta v2 : *stable*
+
+
+
+## what's new in v2 :
+[32bit] aadding dll's supporting for making webBlocker worked correctly without problems 
+        if your windows have missing some dlls in system32 .
+[64bit] not supported yet , supporte in 64bit come with version 3 .
 
 
 
@@ -25,7 +32,7 @@ it's a **small and fast** program for blocking web sites to **the next formattin
 
 ## usage :
   - after you extract zip file .
-  - if you have **windows 32bit** go to : **Debug folder** and open **WebBlocker.exe** 
+  - if you have **windows 32bit** go to : **Debug folder** and open **WebBlocker.exe ' as admin '**
     or go to **WebBlocker** folder directlly and open **WebBlocker.exe**  both ways are the same.
   - then should open **WebBlocker v1** as **console application** .
 
