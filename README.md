@@ -41,24 +41,27 @@ it's a **small and fast** program for blocking web sites to **the next formattin
   - then should open **WebBlocker v2** as **console application** .
 
   - **for see all commands avalible in program try enter :**
-  
   ``` 
   =========================================================================
-        help or webBlocker --help or webBlocker -h 
+        $ help
+        $ webBlocker --help
+        $ webBlocker -h 
   =========================================================================
   ```
   - for **block website or multiple websites** :
   NOTE! : don't use : **www.** or **http:** or **https:** or **special charachters** just 'address.domain'
   ```
   =========================================================================
-        webBlocker -b address.domain address.domain ... 
+        $ webBlocker -b address.domain address.domain ... 
+        $ webBlocker --block addres.domain address.domain ...
   =========================================================================
   ```
-  ### example 
   
+  ### example :
   ```
   =========================================================================
-        webBlocker -b example1.com example2.net example3.tv  
+        $ webBlocker -b example1.com example2.net example3.tv  
+        $ webBlocker --block example1.com example2.net example3.tv  
   =========================================================================
   ```
 
@@ -68,5 +71,5 @@ it's a **small and fast** program for blocking web sites to **the next formattin
         [webBlocker] : blocking web => address.domain
   =========================================================================
   ```
-  - else you see warning message probably this message content is invalid format .
+  - else you see **warning message** probably this message content is invalid format .
   
