@@ -49,11 +49,11 @@ it's a **small and fast** program for blocking web sites to **the next formattin
   =========================================================================
   ```
   - for **block website or multiple websites** :
-  NOTE! : don't use : **www.** or **http:** or **https:** or **special charachters** just 'address.domain'
+  NOTE! : don't use : **www.** or **http:** or **https:** or **special charachters** just 'address.extension 
   ```
   =========================================================================
-        $ webBlocker -b address.domain address.domain ... 
-        $ webBlocker --block addres.domain address.domain ...
+        $ webBlocker -b address.extension address.extension ... 
+        $ webBlocker --block address.extension address.extension  ...
   =========================================================================
   ```
   
@@ -68,7 +68,7 @@ it's a **small and fast** program for blocking web sites to **the next formattin
   - **if** your command written and **worked correctly** you should get message from WebBlocker say :
   ```
   =========================================================================
-        [webBlocker] : blocking web => address.domain
+        [webBlocker] : blocking web => address.extension
   =========================================================================
   ```
   - else you see **warning message** probably this message content is invalid format .
