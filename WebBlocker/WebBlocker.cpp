@@ -16,6 +16,7 @@
 // for multi usage in programme
 #include "WebBlocker.h"
 
+
 // including icon resource
 #include <winres.h>
 #include <WinUser.h>
@@ -41,12 +42,7 @@ using namespace stringNews;
 using namespace logFunctions;
 
 
-int main(){
-
-	/*
-		icon part : before start
-	*/
-
+int main() {
 
 	/*	
 		Program start 

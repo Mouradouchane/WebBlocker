@@ -16,8 +16,9 @@ using namespace std;
 
 
 namespace constants {
-	const string standarFilePath = "C:/Windows/System32/Drivers/etc/hosts";
 
+	// this string for targting where is windows in harddisk +   // this static path for hosts file 
+	const string standarFilePath = getenv("SystemDrive") + string("/Windows/System32/Drivers/etc/hosts");
 
 	string getUserName() {
 		char* userName = getenv("USER");
