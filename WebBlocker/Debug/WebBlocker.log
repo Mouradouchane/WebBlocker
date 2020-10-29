@@ -1,5 +1,4 @@
 ﻿  WebBlocker.cpp
-C:\Users\dev\Desktop\WebBlocker\WebBlocker\WebBlocker.h(343,26): warning C4018: '<': signed/unsigned mismatch
 C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.rh(21,1): warning C4005: 'RT_MANIFEST': macro redefinition
 C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(282): message : see previous definition of 'RT_MANIFEST'
 C:\Program Files\Windows Kits\10\Include\10.0.18362.0\um\winuser.rh(22,1): warning C4005: 'CREATEPROCESS_MANIFEST_RESOURCE_ID': macro redefinition

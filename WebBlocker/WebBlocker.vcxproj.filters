@@ -24,11 +24,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="log.json">
-      <Filter>Source Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="WebBlocker.rc" />
   </ItemGroup>
   <ItemGroup>

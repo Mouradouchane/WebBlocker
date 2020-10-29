@@ -1,21 +1,17 @@
 ﻿// for files read and wirte ...
+// for what in main cpp file :)
 #include <iostream>
 #include <fstream>
-// for string usage
 #include <string>
 #include <sstream>
 #include <vector>
-// for win API
 #include <Windows.h>
-// for log.json
-#include <windows.data.json.h>
-//for json usage
-#include "json.hpp"
 
 using namespace std;
 
+namespace CONSTANTS {
 
-namespace constants {
+	string output = "[webBlocker] : ", hint = "[+]", warn = "[!]";
 
 	// this string for targting where is windows in harddisk +   // this static path for hosts file 
 	const string standarFilePath = getenv("SystemDrive") + string("/Windows/System32/Drivers/etc/hosts");
@@ -31,7 +27,7 @@ namespace constants {
 	}
 }
 
-namespace DATE_TIME {
+namespace TIME {
 	string getFormatedDate() {
 
 		time_t TE = time(0);
@@ -57,9 +53,9 @@ namespace DATE_TIME {
 	string Date = "[" __TIME__  "]";
 }
 
-using namespace DATE_TIME;
+using namespace TIME;
 
-namespace ConsoleColors {
+namespace COLORS {
 
 	HANDLE standarHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -85,9 +81,9 @@ namespace ConsoleColors {
 	}
 }
 
-namespace Filesfuncs {
+namespace FILESFUNCTIONS {
 
-	using namespace ConsoleColors;
+	using namespace COLORS;
 
 	string readAll(string fileName , bool OpenAsBinary = false) {
 		try {
@@ -158,7 +154,7 @@ namespace Filesfuncs {
 	// this function for checking if host file is exit in windows or not
 	void checkingDesintation() {
 		while (true) {
-			if (fileIsExist(constants::standarFilePath)) {
+			if (fileIsExist(CONSTANTS::standarFilePath)) {
 				// if exist print hint & going for next step
 				setHintColor();
 				Sleep(500);
@@ -176,184 +172,16 @@ namespace Filesfuncs {
 				setHintColor();
 				cout << "[+] Adding Destination to System32 :) " << endl;
 				// trying making new HOST File 
-				filePutContent(constants::standarFilePath, "# added in " + DATE_TIME::Date);
+				filePutContent(CONSTANTS::standarFilePath, "# added in " + TIME::Date);
 			}
 		}
 	}
 
 }
 
-namespace logFunctions {
-	string output = "[webBlocker] : " , hint = "[+]" , warn = "[!]";
-
-	using namespace ConsoleColors;
-	using namespace Filesfuncs;
-
-		// for json usage "recommended in library"
-		using json = nlohmann::json;
-		
-		// opening log.json and getting all data on it as string
-		string jsonAsString = readAll("log.json");
-
-	// class for getting all blocked sites in json varible after parse :)
-	class BlockedSite {
-		private : 
-			string website, fullTime , domin , date , time;
-
-		public :
-			BlockedSite(string website , string time = __TIME__ , string date =  getFormatedDate()) {
-				this->website = website;
-				this->fullTime = (time + " " + date);
-				this->date = date;
-				this->time = time;
-			}
-			string getSite() {
-				return this->website;
-			}
-			string getFullTime() {
-				return fullTime;
-			}
-			string getTime() {
-				return this->time;
-			}
-			string getDate() {
-				return this->date;
-			}
-	};
-
-	void printAllBlockedSitesInLog() {
-		try {
-		// vector of BlockedSite of Get on it all sites as objects from ' log '
-		vector<BlockedSite> allSites;
-
-		// parsing log data from ' jsonAsString '
-		auto log = json::parse(jsonAsString);
-
-			// get all from 'log' to 'vector allSites'
-			for (unsigned int c = 0; c < log["blockedSites"].size(); c += 1) {
-				// pushing new objects to vector 
-				// objects === blocked sites stored in json file
-				if (!log["blockedSites"].empty()) {
-				allSites.push_back(BlockedSite(log["blockedSites"][c]["website"] , log["blockedSites"][c]["time"] , log["blockedSites"][c]["date"]));
-				}
-				else {
-					break;
-				}
-			} 
-
-			cout << '\n' ; // just new line before starting table
-
-			// switching color console to red for defining starting table
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE) , 12);
-			cout <<(" webSite \t Time of blocking") << endl;
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
-			
-			// printing data if array not empty
-			if (!allSites.empty()) {
-				for (unsigned int c = 0; c < allSites.size(); c += 1) {
-					Sleep(400);
-					// starting printing blocked sites as in table
-					cout << "[" << c << "] " << allSites[c].getSite() << "\t" << allSites[c].getFullTime() << endl;
 
 
-					if (allSites.size() - 1 == c) {
-						cout << endl; // new line after ending table
-					}
-				}
-			}
-			else {
-				setHintColor();
-				cout << output << "there is no blocked sites !" << endl;
-				setDefultColor();
-			}
-		}
-		catch (exception error) {
-
-			/*
-			
-				- exception here need fix later !
-
-			
-			*/
-
-			// if error happen
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-			cout <<"Void List : " << error.what() <<endl;
-			setHintColor();
-			cout << output << "there is no blocked sites !" << endl;
-			// backing to default color
-			setDefultColor();
-		}
-	}
-
-	string BasicDataForNewJsonFile = "{\"blockedSites\": []}";
-
-	void checkLogFileIfEmpty() {
-		string log = "log.json";
-		ifstream fl(log, ios_base::app);
-
-		if (fl.peek() == EOF) {
-			// if is empty file 
-			filePutContent(log , BasicDataForNewJsonFile);
-		}
-
-	}
-
-	// checking if log.json exist or not , if not making new log.json file 
-	// and put on it basic data from ' BasicDataForNewJsonFile '
-	void checkLogFileIsExist() {
-		while (true) {
-			if (Filesfuncs::fileIsExist("log.json")) {
-				// message 
-				setConsoleColor(13);
-				cout << hint << " Founding Desintation to File 'log.json' " << endl;
-				setDefultColor();
-
-				//check if file is empty or have basics
-				checkLogFileIfEmpty();
-
-				// and then stop loop and out this function
-				break;
-			}
-			else {
-				setWarningColor();
-				cout << warn << " Missing Desintation to File 'log.json' " << endl;
-				cout << hint << " Making New Desintation to New File 'log.json' " << endl;
-				// try making file from scratch 
-				Filesfuncs::filePutContent("log.json", BasicDataForNewJsonFile);
-			}
-		}
-	}
-	
-	void appendNewBlockedSiteToLog(string newsite = "") {
-
-		string data = Filesfuncs::readAll("log.json");
-		auto jsonData = json::parse(data);
-		auto newData = json::object({});
-		
-		newData["website"] = newsite;
-		newData["time"] = __TIME__;
-		newData["date"] = getFormatedDate();
-
-		jsonData["blockedSites"].push_back(newData);
-
-		string strData = jsonData.dump();
-
-		ofstream log("log.json", ios_base::trunc);
-		
-		for (long int i = 0; i < strData.length(); i += 1) {
-			log.put(strData[i]);
-		}
-	
-		log.close();
-
-	}
-
-}
-
-
-
-namespace asciiArt {
+namespace ASCIIART {
 	
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -366,13 +194,13 @@ namespace asciiArt {
 			cout << ("\t\t  |_____|___|___|  |_____|_|___|___|_,_|___|_| v1.0") << endl;
 			SetConsoleTextAttribute(consoleHandle, 13);
 			cout << ("================================================================================") << endl;
-			ConsoleColors::setDefultColor();
+			COLORS::setDefultColor();
 	}
 
 }
 
 
-namespace stringNews {
+namespace STRING {
 
 	bool starts_with(const std::string& str, const std::string& prefix)
 	{

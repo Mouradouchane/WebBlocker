@@ -148,9 +148,6 @@
     <ClInclude Include="WebBlocker.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="log.json" />
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="WebBlocker.rc" />
   </ItemGroup>
   <ItemGroup>
