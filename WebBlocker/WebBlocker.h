@@ -1,22 +1,24 @@
 ﻿// for files read and wirte ...
 // for what in main cpp file :)
+/*
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <sstream>
 #include <vector>
 #include <Windows.h>
+*/
 
 using namespace std;
 
 namespace CONSTANTS {
 
-	string output = "[webBlocker] : ", hint = "[+]", warn = "[!]";
+	const string output = "[webBlocker] : ", hint = "[+]", warn = "[!]";
 
 	// this string for targting where is windows in harddisk +   // this static path for hosts file 
 	const string standarFilePath = getenv("SystemDrive") + string("/Windows/System32/Drivers/etc/hosts");
 
-	string getUserName() {
+	const string getUserName() {
 		char* userName = getenv("USER");
 
 		if (!userName) {
@@ -53,7 +55,7 @@ namespace TIME {
 	string Date = "[" __TIME__  "]";
 }
 
-using namespace TIME;
+	using namespace TIME;
 
 namespace COLORS {
 
@@ -179,8 +181,6 @@ namespace FILESFUNCTIONS {
 
 }
 
-
-
 namespace ASCIIART {
 	
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -198,7 +198,6 @@ namespace ASCIIART {
 	}
 
 }
-
 
 namespace STRING {
 

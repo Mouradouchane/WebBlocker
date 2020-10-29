@@ -1,22 +1,22 @@
-# WebBlocker Beta v2 : *stable*
-
-
-
-## what's new in v2 :
-[32bit] aadding dll's supporting for making webBlocker worked correctly without problems 
-        if your windows have missing some dlls in system32 .
-[64bit] not supported yet , supporte in 64bit come with version 3 .
-
+# WebBlocker Beta v3 : *STABLE*
 
 
 ## about :
-it's a **small and fast** program for blocking web sites to **the next formatting of pc** without step back .
+**lightweight** program for blocking websites to **the next formatting of pc** without step back .
+
+
+
+## what's new in v3 :
+[32bit] : removing all json usage for optimization program .
+[64bit] : not supported yet , maybe become supported in v4 or above .
+
 
 
 
 ## requirement  :
 - **windows operating system** 32bit or 64bit .
 - **maybe** C++ runtime requirement .
+- **Any** pc resource can make this program run .
 
 
 
@@ -26,6 +26,8 @@ it's a **small and fast** program for blocking web sites to **the next formattin
   =========================================================================
         git clone https://github.com/Mouradouchane/WebBlocker.git
   =========================================================================
+
+   - then use .exe file in DEBUG folder directly .
 ```
 
 - if you're not familiar with 'git version control' follow this steps :
@@ -35,12 +37,12 @@ it's a **small and fast** program for blocking web sites to **the next formattin
 ## usage :
   - after you extract zip file .
   
-  - if you have **windows 32bit** go to : **Debug folder** and open **WebBlocker.exe ' as admin '**
+  - then you have to go to : **Debug folder** and open **WebBlocker.exe ' as admin '**
     or go to **WebBlocker** folder directlly and open **WebBlocker.exe**  both ways are the same.
     
-  - then should open **WebBlocker v2** as **console application** .
+  - then should open **WebBlocker.exe** as **console application** .
 
-  - **for see all commands avalible in program try enter :**
+  - **for see all commands avalible in program you can use on of them :**
   ``` 
   =========================================================================
         $ help
@@ -72,4 +74,3 @@ it's a **small and fast** program for blocking web sites to **the next formattin
   =========================================================================
   ```
   - else you see **warning message** probably this message content is invalid format .
-  

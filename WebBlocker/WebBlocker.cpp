@@ -35,6 +35,7 @@ using namespace STRING;
 
 //HINSTANCE hInstance; 
 HICON icon = LoadIcon(NULL, MAKEINTRESOURCE(IDI_ICON1));
+const string AppVersion = " version 3 stable " , AppV = " v3 stable " , AppName = "WebBlocker v3 stable";
 
 int main() {
 
@@ -42,13 +43,14 @@ int main() {
 		Program start 
 		set console title as first step
 	*/
-	SetConsoleTitle(TEXT("WebBlocker v2"));
+	//SetConsoleTitle((LPCWSTR)AppVersion.c_str());
+	SetConsoleTitleA((LPCSTR)AppName.c_str());
 
 	printAsciiArt();
 	setDefultColor();
 
 	Sleep(500); // just sleeping for nice transition :)
-	cout << "Welcome to WebBlocker v2 stable ..." + Date << endl; // printing Date in starting
+	cout << "Welcome to WebBlocker" << AppV << Date << endl; // printing Date in starting
 
 	Sleep(500); // just sleeping for nice transition :)
 
@@ -104,7 +106,7 @@ int main() {
 		"-c or --clear for clearing console outputs"
 	};
 
-	const string AppVersion = "version 3 stable";
+	
 
 	// starting program after checking env & requirements 
 	// in this step program entr to infinte loop for getting inputs from user & do task + give output
