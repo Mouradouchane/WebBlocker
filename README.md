@@ -1,4 +1,4 @@
-# WebBlocker Beta v3 : *STABLE*
+# WebBlocker v3 : *STABLE*
 
 
 ## about :
