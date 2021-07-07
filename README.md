@@ -2,7 +2,7 @@
 
 
 ## about :
-**lightweight** program for blocking websites to **the next formatting of pc** without step back .
+**lightweight** program for blocking websites to **the next formatting of your pc** without step back .
 
 
 
