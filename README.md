@@ -2,21 +2,18 @@
 
 
 ## about :
-**lightweight** program for blocking websites to **the next formatting of your pc** without step back .
+**lightweight** program for blocking websites .
 
 
 
 ## what's new in v3 :
-[32bit] : removing all json usage for optimization program .
-[64bit] : not supported yet , maybe become supported in v4 or above .
-
+[32bit] : remove all json complexity .
 
 
 
 ## requirement  :
-- **windows operating system** 32bit or 64bit .
+- windows 7 or up **32bit** .
 - **maybe** C++ runtime requirement .
-- **Any** pc resource can make this program run .
 
 
 
@@ -27,7 +24,7 @@
         git clone https://github.com/Mouradouchane/WebBlocker.git
   =========================================================================
 
-   - then use .exe file in DEBUG folder directly .
+   - then build sln prject .
 ```
 
 - if you're not familiar with 'git version control' follow this steps :
@@ -37,12 +34,11 @@
 ## usage :
   - after you extract zip file .
   
-  - then you have to go to : **Debug folder** and open **WebBlocker.exe ' as admin '**
-    or go to **WebBlocker** folder directlly and open **WebBlocker.exe**  both ways are the same.
+  - then you have to go to : **Debug folder** or **Release folder** and open **WebBlocker.exe ' as admin '** .
     
-  - then should open **WebBlocker.exe** as **console application** .
+  - then **WebBlocker.exe** should open as **console application** .
 
-  - **for see all commands avalible in program you can use on of them :**
+  - help command in order to see all avalible commands .
   ``` 
   =========================================================================
         $ help
@@ -52,6 +48,7 @@
   ```
   - for **block website or multiple websites** :
   NOTE! : don't use : **www.** or **http:** or **https:** or **special charachters** just 'address.extension 
+
   ```
   =========================================================================
         $ webBlocker -b address.extension address.extension ... 
